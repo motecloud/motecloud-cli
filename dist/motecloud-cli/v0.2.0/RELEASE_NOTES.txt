@@ -1,0 +1,9 @@
+Release: motecloud-cli v0.2.0
+Date: 2026-04-25
+
+Highlights
+- Zero-dependency Python CLI for context prep, session lifecycle, and task capture.
+- Shell launcher (`motecloud.sh`) for simple invocation.
+- Auth mode support: auto, bearer, static.
+- Security hardening: base URL validation, HTTPS-by-default, blocked redirects, bounded retries/timeouts.
+- Added focused CLI tests in `tests/test_motecloud_cli.py`.

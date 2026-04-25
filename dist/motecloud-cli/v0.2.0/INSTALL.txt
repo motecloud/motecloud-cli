@@ -1,0 +1,26 @@
+Motecloud CLI v0.2.0
+
+Quick install (copy files)
+1) Copy `motecloud.py` (and optional `motecloud.sh`) to your machine.
+2) Ensure Python 3.10+ is available.
+3) Set environment variables:
+   - MOTECLOUD_BASE_URL (optional, default: https://motecloud.io)
+   - MOTECLOUD_TENANT_ID (required)
+   - MOTECLOUD_TENANT_TOKEN or MOTECLOUD_API_KEY (required)
+4) Run:
+   python3 motecloud.py --help
+
+Examples
+- Prime context:
+  python3 motecloud.py prepare --task "Investigate regression" --agent "jules"
+- Open session:
+  python3 motecloud.py session open --id "jules_pr_123" --agent "jules"
+- Append event:
+  python3 motecloud.py session append --id "jules_pr_123" --content "Found issue in auth.py"
+- Close session:
+  python3 motecloud.py session close --id "jules_pr_123" --summary "Applied fix and validated"
+
+Security notes
+- HTTPS is required by default.
+- Use --allow-http only for trusted local development endpoints.
+- Redirects are blocked to avoid token leakage.

@@ -1,0 +1,86 @@
+name: Release CLI
+
+on:
+  push:
+    tags:
+      - 'cli/v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag to release (e.g. v0.2.0)'
+        required: true
+
+permissions:
+  contents: write   # needed to create GitHub Releases
+
+env:
+  CLI_RELEASE_REPOSITORY: motecloud/motecloud-cli
+
+jobs:
+  release:
+    name: Package and publish CLI release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Derive version
+        id: ver
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            # tag format: cli/v0.2.0  →  v0.2.0
+            VERSION="${GITHUB_REF_NAME#cli/}"
+          fi
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "bundle=motecloud-cli-${VERSION}.tar.gz" >> "$GITHUB_OUTPUT"
+
+      - name: Verify dist bundle exists
+        run: |
+          BUNDLE="dist/motecloud-cli/${{ steps.ver.outputs.bundle }}"
+          if [[ ! -f "$BUNDLE" ]]; then
+            echo "::error::Bundle not found at $BUNDLE — run 'make dist-cli' first and commit."
+            exit 1
+          fi
+
+      - name: Verify checksums
+        working-directory: dist/motecloud-cli/${{ steps.ver.outputs.version }}
+        run: sha256sum -c SHA256SUMS
+
+      - name: Build PyPI wheel
+        run: |
+          pip install build --quiet
+          python -m build --wheel --outdir dist/pypi/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          repository: ${{ env.CLI_RELEASE_REPOSITORY }}
+          token: ${{ secrets.MOTECLOUD_CLI_RELEASE_TOKEN || github.token }}
+          tag_name: ${{ steps.ver.outputs.version }}
+          name: motecloud-cli ${{ steps.ver.outputs.version }}
+          body_path: dist/motecloud-cli/${{ steps.ver.outputs.version }}/RELEASE_NOTES.txt
+          draft: false
+          prerelease: false
+          files: |
+            dist/motecloud-cli/${{ steps.ver.outputs.bundle }}
+            dist/motecloud-cli/${{ steps.ver.outputs.bundle }}.sha256
+            dist/motecloud-cli/${{ steps.ver.outputs.version }}/motecloud.py
+            dist/motecloud-cli/${{ steps.ver.outputs.version }}/motecloud.py.sha256
+            dist/motecloud-cli/${{ steps.ver.outputs.version }}/motecloud.sh
+            dist/motecloud-cli/${{ steps.ver.outputs.version }}/motecloud.sh.sha256
+            dist/motecloud-cli/${{ steps.ver.outputs.version }}/SHA256SUMS
+            dist/motecloud-cli/${{ steps.ver.outputs.version }}/RELEASE_MANIFEST.json
+            dist/pypi/*.whl
+
+      - name: Publish to PyPI
+        if: ${{ !contains(steps.ver.outputs.version, 'rc') && !contains(steps.ver.outputs.version, 'alpha') && !contains(steps.ver.outputs.version, 'beta') }}
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/pypi/
+          skip-existing: true
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}

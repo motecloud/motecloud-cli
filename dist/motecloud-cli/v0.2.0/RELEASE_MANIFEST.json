@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "product": "motecloud-cli",
+  "version": "v0.2.0",
+  "generated_utc": "2026-04-25T11:14:39.741080+00:00",
+  "artifacts": [
+    {
+      "filename": "VERIFY.sh",
+      "bytes": 268,
+      "sha256": "0ee2e19d078057130ded174cf20337adf24032ae9090c4a42db716449f4aadc4"
+    },
+    {
+      "filename": "VERSION",
+      "bytes": 20,
+      "sha256": "b9d16369202829e58022c1144f2e5b7846ceb55d70ca7a94609bc10e7deb29f0"
+    },
+    {
+      "filename": "motecloud.py.sha256",
+      "bytes": 79,
+      "sha256": "8c535b79e5ecdd73c92bbfd3d35cb8cd0016e4eef7d97800a43ae7e921a22180"
+    },
+    {
+      "filename": "motecloud.sh",
+      "bytes": 328,
+      "sha256": "4dd2d4a7d7025c44df31172857344ebad117711c471ec4f6a2fe22484ac4aa05"
+    },
+    {
+      "filename": "INSTALL.txt",
+      "bytes": 963,
+      "sha256": "66bb17d42c2f9d9a2b059d26ba1411a530b3cde0f375908af270636a2a49e29b"
+    },
+    {
+      "filename": "motecloud.sh.sha256",
+      "bytes": 79,
+      "sha256": "bbb69affd1c5f208332acbe22b9f410f17f563df0630bed75de837454b305d9f"
+    },
+    {
+      "filename": "LICENSE.txt",
+      "bytes": 1079,
+      "sha256": "a5241cbe02d0ad14772d03e1c580f12b5a2db7f5db3073abfb27afd59e2a5e96"
+    },
+    {
+      "filename": "RELEASE_NOTES.txt",
+      "bytes": 409,
+      "sha256": "2ae06331a9c244bbd2b2cb6d0194790885d800d9a91856d807db95bde7c010a0"
+    },
+    {
+      "filename": "motecloud.py",
+      "bytes": 17053,
+      "sha256": "33892a5b26835310f5c13cb6b422fc83dd1500daad63f213bc0682129fca67d4"
+    }
+  ],
+  "bundle": {
+    "filename": "motecloud-cli-v0.2.0.tar.gz",
+    "bytes": 6178,
+    "sha256": "5b18373c4b49769c099381088d337f9349f80b722026b087da54ba8dd51054bc",
+    "path": "dist/motecloud-cli/motecloud-cli-v0.2.0.tar.gz"
+  }
+}
