@@ -9,7 +9,7 @@
 ## Quick install (recommended)
 
 ```sh
-curl -sSL https://motecloud.io/install-cli.sh | sh
+curl -sSL https://raw.githubusercontent.com/motecloud/motecloud-cli/main/scripts/install-cli.sh | sh
 ```
 
 This downloads the latest release, verifies the SHA256 checksum, and installs `motecloud` to `/usr/local/bin`. Requires Python 3.10+.
@@ -17,13 +17,13 @@ This downloads the latest release, verifies the SHA256 checksum, and installs `m
 To install to a custom prefix (e.g., no sudo):
 
 ```sh
-curl -sSL https://motecloud.io/install-cli.sh | sh -s -- --prefix ~/.local
+curl -sSL https://raw.githubusercontent.com/motecloud/motecloud-cli/main/scripts/install-cli.sh | sh -s -- --prefix ~/.local
 ```
 
 To pin a specific version:
 
 ```sh
-curl -sSL https://motecloud.io/install-cli.sh | sh -s -- --version v0.2.0
+curl -sSL https://raw.githubusercontent.com/motecloud/motecloud-cli/main/scripts/install-cli.sh | sh -s -- --version v0.2.0
 ```
 
 ---
@@ -139,7 +139,7 @@ In GitHub Actions or similar:
 
 ```yaml
 - name: Install motecloud-cli
-  run: curl -sSL https://motecloud.io/install-cli.sh | sh
+  run: curl -sSL https://raw.githubusercontent.com/motecloud/motecloud-cli/main/scripts/install-cli.sh | sh
   env:
     MOTECLOUD_CLI_PREFIX: ${{ runner.tool_cache }}/motecloud
 
@@ -158,7 +158,7 @@ For agents that cannot use MCP (e.g., Jules, Devin, custom runners), copy `motec
 
 ```sh
 # Re-run the installer to get the latest version:
-curl -sSL https://motecloud.io/install-cli.sh | sh
+curl -sSL https://raw.githubusercontent.com/motecloud/motecloud-cli/main/scripts/install-cli.sh | sh
 
 # Or with pip:
 pip install --upgrade motecloud-cli

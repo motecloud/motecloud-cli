@@ -2,9 +2,9 @@
 # install-cli.sh — One-line installer for motecloud-cli
 #
 # Usage:
-#   curl -sSL https://motecloud.io/install-cli.sh | sh
-#   curl -sSL https://motecloud.io/install-cli.sh | sh -s -- --prefix /usr/local
-#   curl -sSL https://motecloud.io/install-cli.sh | sh -s -- --version v0.2.0
+#   curl -sSL https://raw.githubusercontent.com/motecloud/motecloud-cli/main/scripts/install-cli.sh | sh
+#   curl -sSL https://raw.githubusercontent.com/motecloud/motecloud-cli/main/scripts/install-cli.sh | sh -s -- --prefix /usr/local
+#   curl -sSL https://raw.githubusercontent.com/motecloud/motecloud-cli/main/scripts/install-cli.sh | sh -s -- --version v0.2.0
 #
 # Options:
 #   --version VERSION   Install a specific version (default: latest)
@@ -190,6 +190,6 @@ cat <<MSG
     3. Prime context:
          motecloud prepare --task "My first task" --agent "my-agent"
 
-  Full docs: https://motecloud.io/docs/reference/cli-install
+  Full docs: https://github.com/motecloud/motecloud-cli#readme
 
 MSG
