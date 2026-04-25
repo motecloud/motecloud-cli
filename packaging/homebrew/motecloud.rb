@@ -13,7 +13,7 @@
 
 class MotecloudCli < Formula
   desc "Zero-dependency CLI for Motecloud memory and session APIs"
-  homepage "https://motecloud.io/docs/reference/cli-install"
+  homepage "https://github.com/motecloud/motecloud-cli#readme"
   url "https://github.com/motecloud/motecloud-cli/releases/download/v0.2.0/motecloud-cli-v0.2.0.tar.gz"
   sha256 "5b18373c4b49769c099381088d337f9349f80b722026b087da54ba8dd51054bc"
   license "MIT"

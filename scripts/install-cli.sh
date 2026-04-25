@@ -27,7 +27,7 @@ VERIFY=1
 ALLOW_HTTP=0
 GITHUB_REPO="motecloud/motecloud-cli"
 GITHUB_RELEASES="https://github.com/${GITHUB_REPO}/releases"
-FALLBACK_BASE="https://motecloud.io/cli"
+FALLBACK_BASE="https://raw.githubusercontent.com/motecloud/motecloud-cli/main/dist/motecloud-cli"
 
 # ---------------------------------------------------------------------------
 # Argument parsing
@@ -110,7 +110,10 @@ fi
 if [ "$VERIFY" = "1" ]; then
   HASH_URL="${GITHUB_RELEASES}/download/v${VERSION_BARE}/${TARBALL}.sha256"
   info "Verifying checksum..."
-  if curl -sSL --fail "$HASH_URL" -o "$TMP_DIR/${TARBALL}.sha256" 2>/dev/null; then
+  if ! curl -sSL --fail "$HASH_URL" -o "$TMP_DIR/${TARBALL}.sha256" 2>/dev/null; then
+    curl -sSL --fail "${FALLBACK_BASE}/${TARBALL}.sha256" -o "$TMP_DIR/${TARBALL}.sha256" 2>/dev/null || true
+  fi
+  if [ -s "$TMP_DIR/${TARBALL}.sha256" ]; then
     EXPECTED=$(cat "$TMP_DIR/${TARBALL}.sha256" | awk '{print $1}')
     ACTUAL=$(python3 -c "
 import hashlib, sys

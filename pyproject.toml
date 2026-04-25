@@ -27,8 +27,8 @@ classifiers = [
 motecloud = "motecloud_cli:main"
 
 [project.urls]
-Homepage = "https://motecloud.io/cli"
-Documentation = "https://motecloud.io/docs/reference/cli-install"
+Homepage = "https://github.com/motecloud/motecloud-cli#readme"
+Documentation = "https://github.com/motecloud/motecloud-cli/blob/main/docs/reference/cli-install.md"
 Repository = "https://github.com/motecloud/motecloud-cli"
 Changelog = "https://github.com/motecloud/motecloud-cli/releases/tag/v0.2.0"
 "Bug Tracker" = "https://github.com/motecloud/motecloud-cli/issues"
